@@ -16,7 +16,7 @@ for sub_folder in "$source_dir"/sub*/; do
         mkdir -p "$sub_dest"
 			# Echo statement to verify
 		  echo "Created subfolder for ${sub_name}"
-        # Iterate through folders starting with "L2" inside the sub_folder
+        # Iterate through folders starting with "L1" inside the sub_folder
         for L1_folder in "$sub_folder"L1_task-socialdoors_model-1_type-act*/; do
         # change into L1 / pull from L1 dir
             # Check if L1_folder is a directory

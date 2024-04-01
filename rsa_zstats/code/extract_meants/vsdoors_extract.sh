@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
-## NEEDS EDITING!!!!
 
 # Ensure paths are correct irrespective from where user runs the script
 source_dir="/ZPOOL/data/projects/istart-mel/rsa_zstats"
-dest_dir="/ZPOOL/data/projects/istart-mel/data/sharedreward"
+dest_dir="/ZPOOL/data/projects/istart-mel/data/socialdoors/vs_doors"
 
 # Iterate through each subject folder in the doors directory
-for sub_dir in "${source_dir}/sharedreward/"sub-*; do
+for sub_dir in "${source_dir}/socdoors/doors/"sub-*; do
     sub=$(basename "$sub_dir")
 		echo "${sub} pulled successfully"
     # Define mask path
-    mask="/ZPOOL/data/projects/istart-mel/rsa_zstats/masks/thr_sub-1001-zstat1-VS-slice.nii.gz"
+    mask="/ZPOOL/data/projects/istart-mel/rsa_zstats/masks/seed-VS_thr5.nii.gz"
 
     # Define input files for fslmeants command using find
-    input_files=$(find "${sub_dir}" -name '*zstat1.nii.gz' -type f)
+    input_files=$(find "${sub_dir}" -name 'zstat*.nii.gz' -type f)
 		echo "Pulled inputs: ${input_files}"
     # Run fslmeants command with the mask for each zstat file
     for file in $input_files; do
@@ -21,7 +20,7 @@ for sub_dir in "${source_dir}/sharedreward/"sub-*; do
     	number=$(echo "$file" | grep -oP 'zstat\K\d+(?=.nii.gz)') 
         fslmeants -i $file \
                   -m "${mask}" \
-                  -o "${dest_dir}/${sub}_socialdoors_zstat${number}.txt"
+                  -o "${dest_dir}/${sub}_doors_zstat${number}.txt"
       echo "Created successfully ${number}"
     done
 done
