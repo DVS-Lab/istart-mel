@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Define the regions of interest
+regions=('vs' 'vmpfc' 'lamyg' 'ramyg' 'tpj')
+
+# Define the directory containing the CSV files
+csv_dir="/ZPOOL/data/projects/istart-mel/data/matrices/all_socdoors_mats"
+
+# Function to extract unique conditions from a CSV file
+extract_conditions() {
+    awk -F'\t' 'NR>1 {print $3}' "$1" | sort | uniq
+}
+
+# Iterate over each region
+for region in "${regions[@]}"; do
+    # Create an empty output file for the region
+    output_file="/ZPOOL/data/projects/istart-mel/data/matrices/${region}_socialdoors.csv"
+    echo "sub_id,${region}_soc_win,${region}_soc_loss,${region}_door_win,${region}_door_loss" > "$output_file"
+
+    # Get unique conditions for the current region
+    conditions=$(extract_conditions "$csv_dir/all_doors_${region}_mat.csv")
+
+    # Pivot the data for each unique condition
+    while IFS= read -r condition; do
+        awk -F'\t' -v condition="$condition" 'NR>1 && $3 == condition {
+            if (condition == "soc_win") {
+                soc_win[$1] = $4
+            } else if (condition == "soc_loss") {
+                soc_loss[$1] = $4
+            } else if (condition == "door_win") {
+                door_win[$1] = $4
+            } else if (condition == "door_loss") {
+                door_loss[$1] = $4
+            }
+        }
+        END {
+            for (sub_id in soc_win) {
+                printf "%s,%s,%s,%s,%s\n", sub_id, soc_win[sub_id], soc_loss[sub_id], door_win[sub_id], door_loss[sub_id]
+            }
+        }' "$csv_dir/all_doors_${region}_mat.csv" >> "$output_file"
+    done <<< "$conditions"
+done
