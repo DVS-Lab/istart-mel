@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Base directory
+BASE_DIR="/ZPOOL/data/projects/istart-mel/updated_rsa/derivatives/fsl"
+
+# Loop through all subject folders
+for SUBJ in ${BASE_DIR}/sub-*; do
+    if [ -d "$SUBJ/L1_task-sharedreward_model-2_type-act_run-1_sm-6.feat" ] && \
+       [ -d "$SUBJ/L1_task-sharedreward_model-2_type-act_run-1_sm-6+.feat" ]; then
+        
+        # Source and destination directories
+        SRC_DIR="$SUBJ/L1_task-sharedreward_model-2_type-act_run-1_sm-6.feat/reg"
+        DEST_DIR="$SUBJ/L1_task-sharedreward_model-2_type-act_run-1_sm-6+.feat"
+        
+        # Check if 'reg' directory exists
+        if [ -d "$SRC_DIR" ]; then
+            echo "Copying from $SRC_DIR to $DEST_DIR"
+            cp -r "$SRC_DIR" "$DEST_DIR"
+        else
+            echo "Skipping $SUBJ: 'reg' directory not found in source."
+        fi
+    else
+        echo "Skipping $SUBJ: Required directories not found."
+    fi
+done
+
+echo "Transfer complete!"
