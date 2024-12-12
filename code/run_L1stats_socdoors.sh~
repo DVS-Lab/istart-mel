@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Ensure paths are correct irrespective of where user runs the script
+scriptdir=/ZPOOL/data/projects/istart-mel/updated_rsa/code
+basedir=/ZPOOL/data/projects/istart-mel/updated_rsa
+
+# create log file to record what we did and when
+logs=${basedir}/logs
+logfile=${logs}/rerunL1_doors_date-$(date +"%FT%H%M").log
+
+# For task # doors # socialdoors
+for task in socialdoors; do
+    for sub in $(cat ${scriptdir}/newsubs.txt); do
+        # Manages the number of jobs and cores
+        SCRIPTNAME=${scriptdir}/L1stats_socdoors.sh
+        NCORES=15
+        while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
+            sleep 5s
+        done
+        # Run the main script for each subject, task, with log file (always run 1)
+        bash $SCRIPTNAME $sub 1 $task $logfile &
+        sleep 1s
+    done
+done
