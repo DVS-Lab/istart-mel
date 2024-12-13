@@ -24,7 +24,7 @@ sub=$1
 
 
 for run in 1; do # 1 2 for shared reward
-  #input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-doors_run-${run}_events.tsv
+  # input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-doors_run-${run}_events.tsv
   input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-socialdoors_run-${run}_events.tsv
   # input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-sharedreward_run-${run}_events.tsv
   output=${baseout}/sub-${sub}/socialdoors # doors #sharedreward

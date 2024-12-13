@@ -23,11 +23,11 @@ fi
 sub=$1
 
 
-for run in 1; do # 1 2 for shared reward
-  input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-doors_run-${run}_events.tsv
-  #input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-socialdoors_run-${run}_events.tsv
-  # input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-sharedreward_run-${run}_events.tsv
-  output=${baseout}/sub-${sub}/doors # doors #sharedreward
+for run in 1 2; do # 1 2 for shared reward 1 for doors socialdoors
+  # input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-doors_run-${run}_events.tsv
+  # input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-socialdoors_run-${run}_events.tsv
+  input=${datadir}/bids/sub-${sub}/func/sub-${sub}_task-sharedreward_run-${run}_events.tsv
+  output=${baseout}/sub-${sub}/sharedreward # socialdoors # doors #sharedreward
   mkdir -p $output
   if [ -e $input ]; then 
     bash /ZPOOL/data/tools/BIDSto3col.sh $input ${output}/run-${run}

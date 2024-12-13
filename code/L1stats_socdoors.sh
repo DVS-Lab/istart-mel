@@ -43,6 +43,10 @@ fi
 # Activation Analysis
 OUTPUT=${MAINOUTPUT}/L1_task-${TASK}_model-1_type-act_run-${run}_sm-${sm}
 
+# Ensure the output directory exists before running FEAT
+mkdir -p $OUTPUT.feat
+
+# Check if the feat output already exists
 if [ -e ${OUTPUT}.feat/cluster_mask_zstat1.nii.gz ]; then
     exit
 else
@@ -50,9 +54,11 @@ else
     rm -rf ${OUTPUT}.feat
 fi
 
+# Set template for FEAT model
 ITEMPLATE=${maindir}/templates/L1_task-${TASK}_model-1_type-act.fsf
 OTEMPLATE=${MAINOUTPUT}/L1_sub-${sub}_task-${TASK}_model-1_type-act_run-${run}.fsf
 
+# Update the FSF template with specific parameters
 sed -e 's@OUTPUT@'"$OUTPUT"'@g' \
     -e 's@DATA@'"$DATA"'@g' \
     -e 's@EVDIR_win.txt@'"${EVDIR}_win.txt"'@g' \
@@ -64,6 +70,7 @@ sed -e 's@OUTPUT@'"$OUTPUT"'@g' \
     -e 's@NVOLUMES@'"$NVOLUMES"'@g' \
     <$ITEMPLATE> $OTEMPLATE
 
+# Run FEAT
 feat $OTEMPLATE
 
 # NeuroStars Registration Fix

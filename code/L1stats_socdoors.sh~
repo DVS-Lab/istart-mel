@@ -6,7 +6,6 @@
 # Ensure paths are correct irrespective of where the user runs the script
 scriptdir=/ZPOOL/data/projects/istart-mel/updated_rsa/code
 maindir=/ZPOOL/data/projects/istart-mel/updated_rsa
-istartdatadir=/ZPOOL/data/projects/istart-mel/updated_rsa
 
 # Study-specific inputs
 sm=6
@@ -18,7 +17,7 @@ logfile=$4
 # Set inputs and general outputs
 MAINOUTPUT=${maindir}/derivatives/fsl/sub-${sub}
 mkdir -p $MAINOUTPUT
-DATA=${istartdatadir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run}_space-MNI152NLin6Asym_desc-preproc_bold.nii.gz
+DATA=${maindir}/derivatives/fmriprep/sub-${sub}/func/sub-${sub}_task-${TASK}_run-${run}_space-MNI152NLin6Asym_desc-preproc_bold.nii.gz
 NVOLUMES=$(fslnvols $DATA)
 CONFOUNDEVS=${maindir}/derivatives/fsl/confounds/sub-${sub}/sub-${sub}_task-${TASK}_run-${run}_desc-fslConfounds.tsv
 

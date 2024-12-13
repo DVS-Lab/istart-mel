@@ -2,16 +2,16 @@
 
 # Ensure paths are correct irrespective of where user runs the script
 scriptdir=/ZPOOL/data/projects/istart-mel/updated_rsa/code
-basedir=/ZPOOL/data/projects/istart-mel/updated_rsa
+maindir=/ZPOOL/data/projects/istart-mel/updated_rsa
 
 # create log file to record what we did and when
-logs=${basedir}/logs
+logs=${maindir}/logs
 logfile=${logs}/rerunL1_socdoors_date-$(date +"%FT%H%M").log
 
 # For task doors
 for sub in $(cat ${scriptdir}/newsubs.txt); do
     SCRIPTNAME=${scriptdir}/L1stats_socdoors.sh
-    NCORES=15
+    NCORES=5
     while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
         sleep 5s
     done
@@ -23,7 +23,7 @@ done
 # For task socialdoors
 for sub in $(cat ${scriptdir}/newsubs.txt); do
     SCRIPTNAME=${scriptdir}/L1stats_socdoors.sh
-    NCORES=15
+    NCORES=5
     while [ $(ps -ef | grep -v grep | grep $SCRIPTNAME | wc -l) -ge $NCORES ]; do
         sleep 5s
     done
