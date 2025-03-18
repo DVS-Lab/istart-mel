@@ -18,6 +18,8 @@ masks=(
     ["vs"]="seed-VS_thr5.nii.gz"
     ["vmpfc"]="seed-vmPFC-5mm-thr.nii"
     ["tpj"]="seed-pTPJ-bin.nii"
+    ["amyg"]="rHarvardOxford_amygdala_nan_thr_bin.nii.gz"
+    ["V1"]="V1_control_thr.nii.gz"
 )
 
 # Ensure mask exists

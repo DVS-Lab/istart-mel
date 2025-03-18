@@ -4,9 +4,9 @@
 scriptdir="/ZPOOL/data/projects/istart-mel/updated_rsa/code"
 basedir="/ZPOOL/data/projects/istart-mel/updated_rsa"
 log_dir="${basedir}/logs"
-output_dir="${basedir}/meants_output"
+output_dir="${basedir}/rawactivation_output"
 newsubs_file="${scriptdir}/newsubs.txt"
-extract_script="${scriptdir}/extract_meants.sh"
+extract_script="${scriptdir}/extract_rawactivation.sh"
 NCORES=10
 
 # Ensure required files exist
@@ -26,7 +26,7 @@ masks=("amyg" "lamyg" "ramyg" "vs" "vmpfc" "tpj" "V1")
 subjects=$(cat "$newsubs_file")
 
 mkdir -p "$log_dir"
-log_file="${log_dir}/extract_meants_$(date +'%Y%m%d_%H%M%S').log"
+log_file="${log_dir}/extract_rawactivation_$(date +'%Y%m%d_%H%M%S').log"
 echo "Starting extraction process: $(date)" > "$log_file"
 
 # Function to run extraction

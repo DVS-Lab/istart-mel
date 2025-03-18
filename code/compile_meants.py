@@ -10,7 +10,7 @@ output_dir = os.path.join(os.path.dirname(raw_dir), "compiled")
 os.makedirs(output_dir, exist_ok=True)  # Create the compiled directory if it doesn't exist
 
 # Define ROI and condition mappings
-rois = ["lamyg", "ramyg", "tpj", "vs", "vmpfc"]
+rois = ["lamyg", "ramyg", "tpj", "vs", "vmpfc", "V1", "amyg"]
 conditions = {
     "str_diff": "_stranger_zstat1",
     "comp_diff": "_computer_zstat1",

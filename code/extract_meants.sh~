@@ -8,7 +8,7 @@ mask_shortname=$3
 # Paths and directories # I'm sorrrryyyyy for hard coding
 data_dir="/ZPOOL/data/projects/istart-mel/updated_rsa/derivatives/fsl"
 output_dir="/ZPOOL/data/projects/istart-mel/updated_rsa/meants_output"
-mask_dir="/ZPOOL/data/projects/istart-mel/updated_rsa/masks/resliced"
+mask_dir="/ZPOOL/data/projects/istart-mel/updated_rsa/masks/resliced/resliced_bin"
 
 # Map shortened mask names back to full file names for sourcing
 declare -A masks
@@ -18,6 +18,7 @@ masks=(
     ["vs"]="seed-VS_thr5.nii.gz"
     ["vmpfc"]="seed-vmPFC-5mm-thr.nii"
     ["tpj"]="seed-pTPJ-bin.nii"
+    ["V1"]="V1_control_resampled.nii.gz"
 )
 
 # Ensure mask exists
